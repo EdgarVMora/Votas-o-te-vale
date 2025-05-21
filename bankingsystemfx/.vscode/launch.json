@@ -1,0 +1,82 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug",
+            "request": "launch",
+            "mainClass": "com.miappbanco.App",
+            "projectName": "bankingsystemfx"
+        },
+        {
+            "type": "java",
+            "name": "Debug (current file)",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (current file, no debug)",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "com.miappbanco.App",
+            "projectName": "bankingsystemfx"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File (no debug)",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "Launch App (no debug)",
+            "request": "launch",
+            "mainClass": "com.miappbanco.App",
+            "projectName": "bankingsystemfx",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "Launch Java Program (no debug)",
+            "request": "launch",
+            "mainClass": "",
+            "console": "internalConsole"
+        },
+        {
+            "type": "java",
+            "name": "Launch Java Program",
+            "request": "launch",
+            "mainClass": ""
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.miappbanco.App",
+            "projectName": "bankingsystemfx"
+        }
+    ]
+}
