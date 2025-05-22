@@ -1,4 +1,4 @@
-package com.finalproject;
+package com.finalproject.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter; //libreria para poder cambiar el formato de la fecha
 
