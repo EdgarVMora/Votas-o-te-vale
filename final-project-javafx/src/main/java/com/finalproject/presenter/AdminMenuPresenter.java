@@ -52,8 +52,8 @@ public class AdminMenuPresenter implements NotificadorMenuAdminAlPresentador {
 
     @Override
     public void alPulsarBotonImprimirResultados() {
-        System.out.println("Presentador: Botón Imprimir Resultados pulsado.");
-        if (navegador != null) navegador.navegarAImprimirResultados();
+        System.out.println("Presentador: Botón Mostrar Resultados pulsado.");
+        if (navegador != null) navegador.navegarAMostrarResultados();
     }
 
     @Override
@@ -65,6 +65,6 @@ public class AdminMenuPresenter implements NotificadorMenuAdminAlPresentador {
     @Override
     public void alPulsarBotonCerrarSesion() {
         System.out.println("Presentador: Botón Cerrar Sesión pulsado.");
-        if (navegador != null) navegador.cerrarSesionYMostrarLogin();
+        if (navegador != null) navegador.alPulsarBotonCerrarSesion();
     }
 }

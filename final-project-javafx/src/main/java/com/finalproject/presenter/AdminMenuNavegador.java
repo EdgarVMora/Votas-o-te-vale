@@ -7,8 +7,8 @@ public interface AdminMenuNavegador {
     void navegarAMostrarCandidatos();
     void navegarAAbrirVotaciones();
     void navegarACerrarVotaciones();
-    void navegarAImprimirResultados();
-    void navegarARegistro(); // O la pantalla que corresponda a "Registro"
-    void cerrarSesionYMostrarLogin();
-    void regresarAlMenuAdmin(); // Nuevo método para regresar al menú
+    void navegarAMostrarResultados();
+    void navegarARegistro();
+    void regresarAlMenuAdmin();
+    void alPulsarBotonCerrarSesion();
 }

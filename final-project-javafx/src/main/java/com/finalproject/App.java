@@ -36,6 +36,8 @@ import javafx.scene.control.ButtonType;
 import com.finalproject.view.VotacionView;
 import com.finalproject.presenter.VotacionPresenter;
 import com.finalproject.presenter.VotacionNavegador;
+import com.finalproject.view.MostrarResultadosView;
+import com.finalproject.presenter.MostrarResultadosPresenter;
 
 public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos, VotacionNavegador {
 
@@ -134,10 +136,9 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Lista de Candidatos");
     }
     @Override
-    public void cerrarSesionYMostrarLogin() {
-        mostrarLogin();
+    public void regresarAlMenuAdmin() {
+        mostrarMenuAdmin();
     }
-    // Asegúrate de implementar todos los métodos de AdminMenuNavegador
     @Override
     public void navegarAAbrirVotaciones() {
         EstadoVotaciones estadoVotaciones = EstadoVotaciones.obtenerInstancia();
@@ -217,13 +218,11 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     }
 
     @Override
-    public void navegarAImprimirResultados() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Imprimir Resultados (pendiente)");}
-    @Override
     public void navegarARegistro() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Registro (pendiente)");}
 
     @Override
-    public void regresarAlMenuAdmin() {
-        mostrarMenuAdmin();
+    public void alPulsarBotonCerrarSesion() {
+        mostrarLogin();
     }
 
     // --- Implementación de NavegadorCargaElectores ---
@@ -287,6 +286,20 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     @Override
     public void cerrarSesion() {
         mostrarLogin();
+    }
+
+    private void mostrarResultados() {
+        MostrarResultadosView vistaResultados = new MostrarResultadosView();
+        new MostrarResultadosPresenter(vistaResultados, this);
+        
+        Scene escenaResultados = new Scene(vistaResultados.obtenerNodoVista(), 800, 600);
+        escenarioPrincipal.setScene(escenaResultados);
+        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Resultados de la Votación");
+    }
+
+    @Override
+    public void navegarAMostrarResultados() {
+        mostrarResultados();
     }
 
     public static void main(String[] args) {

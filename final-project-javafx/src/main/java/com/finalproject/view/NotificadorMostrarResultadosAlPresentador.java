@@ -1,5 +1,5 @@
 package com.finalproject.view;
- 
-public interface NotificadorMostrarCandidatosAlPresentador {
+
+public interface NotificadorMostrarResultadosAlPresentador {
     void alPulsarBotonRegresar();
 } 
