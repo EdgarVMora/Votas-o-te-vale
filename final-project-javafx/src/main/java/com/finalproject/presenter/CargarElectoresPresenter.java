@@ -1,7 +1,7 @@
 package com.finalproject.presenter;
 
 import com.finalproject.model.Elector;
-import com.finalproject.model.ServicioElectores; // Asumiendo que ServicioElectores sigue igual
+import com.finalproject.model.ServicioElectores;
 import com.finalproject.view.CargarElectoresViewActions;
 import com.finalproject.view.NotificadorCargarElectoresAlPresentador;
 
@@ -19,7 +19,6 @@ public class CargarElectoresPresenter implements NotificadorCargarElectoresAlPre
     private CargarElectoresViewActions vista;
     private ServicioElectores servicioElectores;
     private NavegadorCargaElectores navegador;
-    // private List<Elector> electoresCargadosTemporalmente; // Ya no es necesario aquí si se pasa directo al navegador
 
     public CargarElectoresPresenter(CargarElectoresViewActions vista, ServicioElectores servicio, NavegadorCargaElectores navegador) {
         this.vista = vista;
@@ -29,7 +28,6 @@ public class CargarElectoresPresenter implements NotificadorCargarElectoresAlPre
         this.vista.limpiarMensajeEstado();
     }
 
-    // alPulsarBotonSeleccionarArchivo(); // Ya no existe en el notificador
 
     @Override
     public void alPulsarBotonCargarArchivo() {
@@ -42,8 +40,7 @@ public class CargarElectoresPresenter implements NotificadorCargarElectoresAlPre
         vista.operacionEnProgreso(true);
         vista.limpiarMensajeEstado();
 
-        // Construir la ruta al recurso
-        String rutaRecurso = "/listas_electores/" + nombreArchivoPredefinido; // Asumiendo que están en la raíz de resources/listas_electores
+        String rutaRecurso = "/listas_electores/" + nombreArchivoPredefinido;
         
         File archivoTemporal = null;
         try {
@@ -52,12 +49,10 @@ public class CargarElectoresPresenter implements NotificadorCargarElectoresAlPre
                 throw new IOException("No se pudo encontrar el recurso: " + rutaRecurso + ". Asegúrate que esté en src/main/resources/listas_electores/");
             }
 
-            // Crear un archivo temporal para pasarlo a ServicioElectores si este espera un File
-            // Si ServicioElectores pudiera tomar un InputStream, sería más directo.
             Path tempFile = Files.createTempFile("electores_temp_", ".txt");
             Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
             archivoTemporal = tempFile.toFile();
-            inputStream.close(); // Cerrar el stream
+            inputStream.close();
 
             List<Elector> electoresCargados = servicioElectores.cargarElectoresDesdeArchivo(archivoTemporal);
             String mensaje = electoresCargados.size() + " electores cargados exitosamente desde " + nombreArchivoPredefinido;
@@ -78,7 +73,7 @@ public class CargarElectoresPresenter implements NotificadorCargarElectoresAlPre
         } finally {
             vista.operacionEnProgreso(false);
             if (archivoTemporal != null) {
-                archivoTemporal.delete(); // Limpiar el archivo temporal
+                archivoTemporal.delete();
             }
         }
     }

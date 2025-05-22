@@ -42,7 +42,7 @@ public class LoginPresenter implements NotificadorLoginAlPresentador {
             return;
         }
 
-        // Primero verificar si es administrador
+        
         if (USUARIO_VALIDO.equals(usuario) && CONTRASENA_VALIDA.equals(contrasena)) {
             vista.limpiarCampos();
             if (navegador != null) {
@@ -53,7 +53,7 @@ public class LoginPresenter implements NotificadorLoginAlPresentador {
             return;
         }
 
-        // Si no es administrador, verificar si es elector
+        
         if (listaElectores != null) {
             for (Elector elector : listaElectores) {
                 if (elector.getUsuario().equals(usuario) && elector.getContrasena().equals(contrasena)) {
@@ -68,7 +68,7 @@ public class LoginPresenter implements NotificadorLoginAlPresentador {
             }
         }
 
-        // Si no es ni administrador ni elector válido
+        
         vista.mostrarErrorLogin("Usuario o contraseña incorrectos.");
         if (navegador != null) {
             navegador.mostrarMensajeLoginFallido("Error de Inicio", "Usuario o contraseña incorrectos.");

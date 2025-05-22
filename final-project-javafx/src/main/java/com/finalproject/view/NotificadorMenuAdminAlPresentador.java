@@ -1,4 +1,4 @@
-package com.finalproject.view; // O donde hayas puesto NotificadorLoginAlPresentador
+package com.finalproject.view; 
 
 public interface NotificadorMenuAdminAlPresentador {
     void alPulsarBotonCargarElectores();

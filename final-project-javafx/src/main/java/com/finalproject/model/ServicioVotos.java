@@ -27,19 +27,16 @@ public class ServicioVotos {
     }
 
     public boolean registrarVoto(Elector elector, Candidato candidato, boolean esNulo) {
-        // Verificar si el elector ya votó
         for (Voto voto : votos) {
             if (voto.getElector().equals(elector)) {
-                return false; // El elector ya votó
+                return false;
             }
         }
 
-        // Registrar el voto
         String fechaVoto = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         Voto nuevoVoto = new Voto(elector, candidato, fechaVoto, esNulo);
         votos.add(nuevoVoto);
 
-        // Actualizar conteo
         if (esNulo) {
             votosNulos++;
         } else {

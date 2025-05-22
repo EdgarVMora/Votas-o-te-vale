@@ -26,7 +26,7 @@ public class MostrarElectoresPresenter implements NotificadorMostrarElectoresAlP
     @Override
     public void alPulsarBotonRegresar() {
         if (navegador != null) {
-            navegador.regresarAlMenuAdmin(); // Usamos el nuevo método para regresar al menú
+            navegador.regresarAlMenuAdmin(); 
         }
     }
 } 

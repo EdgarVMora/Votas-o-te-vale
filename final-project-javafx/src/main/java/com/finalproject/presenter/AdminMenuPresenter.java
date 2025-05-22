@@ -5,13 +5,13 @@ import com.finalproject.view.NotificadorMenuAdminAlPresentador;
 
 public class AdminMenuPresenter implements NotificadorMenuAdminAlPresentador {
 
-    private AdminMenuViewActions vista; // Aunque no la usemos mucho ahora, es bueno tenerla
+    private AdminMenuViewActions vista;
     private AdminMenuNavegador navegador;
 
     public AdminMenuPresenter(AdminMenuViewActions vista, AdminMenuNavegador navegador) {
         this.vista = vista;
         this.navegador = navegador;
-        this.vista.establecerNotificador(this); // El presentador se establece como notificador en la vista
+        this.vista.establecerNotificador(this);
     }
 
     @Override

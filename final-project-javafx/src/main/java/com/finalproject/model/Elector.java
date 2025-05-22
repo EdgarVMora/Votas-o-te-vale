@@ -1,14 +1,13 @@
-package com.finalproject.model; // Paquete corregido
+package com.finalproject.model;
 
 public class Elector {
     private String nombre;
-    private String apellidoPaterno; // Usaremos nombres más descriptivos consistentemente
+    private String apellidoPaterno;
     private String apellidoMaterno;
     private String correo;
-    private Fecha fechaNacimiento; // Usaremos nombres más descriptivos consistentemente
+    private Fecha fechaNacimiento;
     private boolean haVotado;
 
-    // Constructor directo como el que proporcionaste, pero con nombres de parámetros ajustados
     public Elector(String nombre, String apellidoPaterno, String apellidoMaterno, 
                    String correo, Fecha fechaNacimiento) {
         this.nombre = nombre;
@@ -16,10 +15,9 @@ public class Elector {
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
-        this.haVotado = false; // Valor inicial por defecto
+        this.haVotado = false;
     }
 
-    // Getters para los campos básicos
     public String getNombre() {
         return nombre;
     }
@@ -44,30 +42,22 @@ public class Elector {
         return haVotado;
     }
 
-    // Setter para haVotado
     public void setHaVotado(boolean haVotado) {
         this.haVotado = haVotado;
     }
 
-    // Método getUsuario (corregido según instrucción del proyecto)
     public String getUsuario() {
         if (this.correo == null || this.correo.isEmpty() || !this.correo.contains("@")) {
-            // Si el correo es inválido, no se puede generar usuario según la regla.
-            // Podríamos devolver un valor por defecto o lanzar una excepción.
-            // Por simplicidad, devolvemos el correo o una cadena vacía.
-            // O podríamos usar la lógica que tenías antes como fallback:
-            // return (nombre + "." + apellidoPaterno).toLowerCase();
             return this.correo != null ? this.correo.split("@")[0] : "";
         }
         return this.correo.substring(0, this.correo.indexOf("@"));
     }
 
-    // Método getContrasena (tomado de tu Elector.java original, usando los nombres de campo actualizados)
     public String getContrasena() {
         if (this.nombre == null || this.apellidoPaterno == null || this.apellidoMaterno == null || 
             this.fechaNacimiento == null || this.nombre.isEmpty() || 
             this.apellidoPaterno.isEmpty() || this.apellidoMaterno.isEmpty()) {
-            return "DATOSINCOMPLETOS"; // O algún manejo de error
+            return "DATOSINCOMPLETOS";
         }
 
         String contrasenaCalculada = "";
@@ -87,8 +77,8 @@ public class Elector {
         return "Nombre completo: " + nombre + " " + apellidoPaterno + " " + apellidoMaterno +
                "\nCorreo: " + correo +
                "\nFecha de nacimiento: " + (fechaNacimiento != null ? fechaNacimiento.toString() : "N/A") +
-               "\nUsuario: " + getUsuario() +      // Se calcula al llamar
-               "\nContraseña: " + getContrasena() + // Se calcula al llamar
+               "\nUsuario: " + getUsuario() +
+               "\nContraseña: " + getContrasena() +
                "\nHa votado: " + (haVotado ? "Sí" : "No");
     }
 }

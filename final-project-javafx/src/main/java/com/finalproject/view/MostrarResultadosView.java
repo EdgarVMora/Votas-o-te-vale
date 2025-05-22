@@ -29,17 +29,17 @@ public class MostrarResultadosView implements MostrarResultadosViewActions {
 
         tablaResultados = new TableView<>();
 
-        // Columna Candidato
+        
         TableColumn<ResultadoVotacion, String> columnaCandidato = new TableColumn<>("Candidato");
         columnaCandidato.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getNombreCandidato()));
 
-        // Columna Partido
+        
         TableColumn<ResultadoVotacion, String> columnaPartido = new TableColumn<>("Partido");
         columnaPartido.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getPartido()));
 
-        // Columna Votos
+        
         TableColumn<ResultadoVotacion, String> columnaVotos = new TableColumn<>("Votos");
         columnaVotos.setCellValueFactory(cellData -> 
             new SimpleStringProperty(String.valueOf(cellData.getValue().getVotos())));
@@ -68,7 +68,7 @@ public class MostrarResultadosView implements MostrarResultadosViewActions {
     public void mostrarResultados(Map<Candidato, Integer> votosPorCandidato, int votosNulos) {
         tablaResultados.getItems().clear();
         
-        // Añadir resultados de candidatos
+        
         for (Map.Entry<Candidato, Integer> entry : votosPorCandidato.entrySet()) {
             Candidato candidato = entry.getKey();
             ResultadoVotacion resultado = new ResultadoVotacion(
@@ -79,7 +79,7 @@ public class MostrarResultadosView implements MostrarResultadosViewActions {
             tablaResultados.getItems().add(resultado);
         }
 
-        // Añadir votos nulos
+        
         ResultadoVotacion votosNulosResultado = new ResultadoVotacion(
             "Votos Nulos",
             "N/A",
@@ -87,7 +87,7 @@ public class MostrarResultadosView implements MostrarResultadosViewActions {
         );
         tablaResultados.getItems().add(votosNulosResultado);
 
-        // Ordenar por número de votos (descendente)
+        
         tablaResultados.getItems().sort((r1, r2) -> r2.getVotos() - r1.getVotos());
     }
 
@@ -101,11 +101,11 @@ public class MostrarResultadosView implements MostrarResultadosViewActions {
         this.notificador = notificador;
     }
 
-    // Clase interna para representar una fila en la tabla
-    private static class ResultadoVotacion {
-        private String nombreCandidato;
-        private String partido;
-        private int votos;
+    
+    public static class ResultadoVotacion {
+        private final String nombreCandidato;
+        private final String partido;
+        private final int votos;
 
         public ResultadoVotacion(String nombreCandidato, String partido, int votos) {
             this.nombreCandidato = nombreCandidato;
@@ -113,8 +113,16 @@ public class MostrarResultadosView implements MostrarResultadosViewActions {
             this.votos = votos;
         }
 
-        public String getNombreCandidato() { return nombreCandidato; }
-        public String getPartido() { return partido; }
-        public int getVotos() { return votos; }
+        public String getNombreCandidato() {
+            return nombreCandidato;
+        }
+
+        public String getPartido() {
+            return partido;
+        }
+
+        public int getVotos() {
+            return votos;
+        }
     }
 } 

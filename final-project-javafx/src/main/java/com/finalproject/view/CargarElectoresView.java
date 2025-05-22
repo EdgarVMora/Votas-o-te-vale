@@ -11,7 +11,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-// import javafx.stage.Stage; // Ya no es necesario si no hay FileChooser desde la vista
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,13 +23,11 @@ public class CargarElectoresView implements CargarElectoresViewActions {
     private Text textoEstado;
     private NotificadorCargarElectoresAlPresentador notificador;
 
-    // Lista de los nombres de tus archivos precargados (sin la ruta, solo el nombre)
     private final List<String> NOMBRES_ARCHIVOS_PREDEFINIDOS = Arrays.asList(
             "lista1.txt", "lista2.txt", "lista3.txt", "lista4.txt", "lista5.txt"
     );
 
-    public CargarElectoresView(/* Stage escenarioPrimario */) { // Ya no necesitamos el Stage aquí
-        // this.escenarioPrimario = escenarioPrimario;
+    public CargarElectoresView(/* Stage escenarioPrimario */) { 
         inicializarComponentes();
     }
 
@@ -46,30 +43,21 @@ public class CargarElectoresView implements CargarElectoresViewActions {
         comboBoxArchivosPredefinidos = new ComboBox<>(FXCollections.observableArrayList(NOMBRES_ARCHIVOS_PREDEFINIDOS));
         comboBoxArchivosPredefinidos.setPromptText("Elige un archivo");
         
-        // Opcional: mostrar el nombre del archivo seleccionado si es necesario
-        // comboBoxArchivosPredefinidos.setOnAction(e -> {
-        //     if (notificador != null) {
-        //         // Podríamos notificar la selección si el presentador necesitara reaccionar a esto
-        //     }
-        // });
-
-        botonCargarArchivo = new Button("Cargar Electores");
-        botonCargarArchivo.setDisable(true); // Habilitar cuando se seleccione algo
-
         comboBoxArchivosPredefinidos.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             botonCargarArchivo.setDisable(newVal == null);
-            if (newVal != null) {
-                mostrarNombreArchivoSeleccionado("Seleccionado: " + newVal);
-            } else {
-                mostrarNombreArchivoSeleccionado("");
+            if (notificador != null && newVal != null) {
+                mostrarNombreArchivoSeleccionado("Archivo seleccionado: " + newVal);
             }
         });
-        
-        textoEstado = new Text(); // Para mensajes de estado
+
+        botonCargarArchivo = new Button("Cargar Electores");
+        botonCargarArchivo.setDisable(true); 
+
+        textoEstado = new Text(); 
 
         botonCargarArchivo.setOnAction(e -> {
             if (notificador != null && comboBoxArchivosPredefinidos.getValue() != null) {
-                notificador.alPulsarBotonCargarArchivo(); // Ya no pasamos el File
+                notificador.alPulsarBotonCargarArchivo(); 
             }
         });
 
@@ -89,13 +77,11 @@ public class CargarElectoresView implements CargarElectoresViewActions {
 
     @Override
     public void mostrarNombreArchivoSeleccionado(String nombreArchivo) {
-        // Podríamos usar una Label separada o actualizar el textoEstado temporalmente
-        // Por ahora, no tenemos una label dedicada para la ruta, ya que es predefinido.
-        // Si quieres mostrarlo, añade una Label y actualízala aquí.
+        
         if (nombreArchivo.isEmpty()) {
-            textoEstado.setText(""); // Limpiar si no hay nada seleccionado
+            textoEstado.setText(""); 
         }
-        // No hacemos mucho con esto por ahora, el ComboBox muestra la selección.
+        
     }
     
     @Override
@@ -118,7 +104,6 @@ public class CargarElectoresView implements CargarElectoresViewActions {
     public void operacionEnProgreso(boolean enProgreso) {
         comboBoxArchivosPredefinidos.setDisable(enProgreso);
         botonCargarArchivo.setDisable(enProgreso || comboBoxArchivosPredefinidos.getValue() == null);
-        // El botón regresar no se deshabilita generalmente
     }
 
     @Override

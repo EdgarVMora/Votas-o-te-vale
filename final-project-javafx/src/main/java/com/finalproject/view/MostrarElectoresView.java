@@ -28,10 +28,10 @@ public class MostrarElectoresView implements MostrarElectoresViewActions {
         Text titulo = new Text("Lista de Electores Registrados");
         titulo.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
 
-        // Crear la tabla
+       
         tablaElectores = new TableView<>();
         
-        // Columnas de la tabla
+        
         TableColumn<Elector, String> columnaNombre = new TableColumn<>("Nombre");
         columnaNombre.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getNombre()));
@@ -56,7 +56,7 @@ public class MostrarElectoresView implements MostrarElectoresViewActions {
         columnaContrasena.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getContrasena()));
 
-        // Añadir columnas a la tabla
+        
         tablaElectores.getColumns().addAll(
             columnaNombre, 
             columnaApellidoPaterno, 
@@ -66,11 +66,11 @@ public class MostrarElectoresView implements MostrarElectoresViewActions {
             columnaContrasena
         );
 
-        // Mensaje de error
+        
         mensajeError = new Text();
         mensajeError.setStyle("-fx-fill: red;");
 
-        // Botón para regresar
+        
         Button botonRegresar = new Button("Regresar al Menú");
         botonRegresar.setOnAction(e -> {
             if (notificador instanceof NotificadorMostrarElectoresAlPresentador) {
@@ -78,7 +78,7 @@ public class MostrarElectoresView implements MostrarElectoresViewActions {
             }
         });
 
-        // Añadir un texto informativo sobre las contraseñas
+        
         Text infoContrasenas = new Text("Nota: Las contraseñas se generan automáticamente al cargar los electores.");
         infoContrasenas.setStyle("-fx-font-style: italic; -fx-fill: gray;");
 

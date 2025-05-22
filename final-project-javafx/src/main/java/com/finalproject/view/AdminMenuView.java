@@ -19,7 +19,7 @@ public class AdminMenuView implements AdminMenuViewActions {
     }
 
     private void inicializarComponentes() {
-        panelPrincipal = new VBox(15); // Espaciado entre botones
+        panelPrincipal = new VBox(15); 
         panelPrincipal.setAlignment(Pos.CENTER);
         panelPrincipal.setPadding(new Insets(25));
 
@@ -35,7 +35,6 @@ public class AdminMenuView implements AdminMenuViewActions {
         Button botonImprimirResultados = new Button("Imprimir resultados");
         Button botonCerrarSesion = new Button("Cerrar Sesión");
 
-        // Asignar acciones a los botones para notificar al presentador
         botonCargarElectores.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonCargarElectores(); });
         botonCargarCandidatos.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonCargarCandidatos(); });
         botonMostrarElectores.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonMostrarElectores(); });
@@ -54,7 +53,7 @@ public class AdminMenuView implements AdminMenuViewActions {
             botonAbrirVotaciones,
             botonCerrarVotaciones,
             botonImprimirResultados,
-            new Text(" "), // Un pequeño separador visual si lo deseas
+            new Text(" "), 
             botonCerrarSesion
         );
     }
@@ -69,7 +68,7 @@ public class AdminMenuView implements AdminMenuViewActions {
             this.notificador = (NotificadorMenuAdminAlPresentador) notificadorObj;
         } else {
             System.err.println("Error: El notificador para AdminMenuView no es del tipo esperado.");
-            // Considera lanzar una excepción
+            
         }
     }
 }

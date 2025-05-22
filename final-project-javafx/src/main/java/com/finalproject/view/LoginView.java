@@ -113,8 +113,6 @@ public class LoginView implements LoginViewActions {
 
     @Override
     public void indicarNavegacionAPanelAdmin() {
-        // La vista misma no navega, solo podría, por ejemplo, limpiarse
-        // o indicar visualmente que la acción fue exitosa antes de que App cambie la escena.
         System.out.println("LoginView: El presentador indicó que el login fue exitoso y se procederá a navegar.");
     }
 

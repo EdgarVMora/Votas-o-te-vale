@@ -1,7 +1,7 @@
-package com.finalproject.model; // Paquete corregido
+package com.finalproject.model;
 
 public class Fecha {
-    private int dia; // Atributos en minúscula por convención
+    private int dia;
     private int mes;
     private int anio;
 
@@ -25,7 +25,6 @@ public class Fecha {
 
     @Override
     public String toString() {
-        // Formato dd/MM/yyyy para consistencia, como se espera en archivos.
         return String.format("%02d/%02d/%04d", dia, mes, anio);
     }
 }

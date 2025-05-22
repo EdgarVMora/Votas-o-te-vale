@@ -35,7 +35,7 @@ public class CargarCandidatosView implements CargarCandidatosViewActions {
 
         combosPorPartido = new HashMap<>();
         
-        // Crear sección para cada partido
+        
         for (String partido : ARCHIVOS_POR_PARTIDO.keySet()) {
             VBox seccionPartido = new VBox(5);
             

@@ -1,23 +1,22 @@
 package com.finalproject;
 
-// ... otros imports para Login y AdminMenu ...
 import com.finalproject.presenter.AdminMenuNavegador;
 import com.finalproject.presenter.AdminMenuPresenter;
 import com.finalproject.view.AdminMenuView;
 
-// Imports para Cargar Electores
-import com.finalproject.model.Elector; // Importar Elector
-import com.finalproject.model.ServicioElectores; // Importar ServicioElectores
+
+import com.finalproject.model.Elector; 
+import com.finalproject.model.ServicioElectores; 
 import com.finalproject.presenter.CargarElectoresPresenter;
-import com.finalproject.presenter.NavegadorCargaElectores; // La nueva interfaz
+import com.finalproject.presenter.NavegadorCargaElectores; 
 import com.finalproject.view.CargarElectoresView;
-// import com.finalproject.view.CargarElectoresViewActions; // No se usa directamente aquí
+
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.util.ArrayList; // Para la lista de electores
-import java.util.List;     // Para la lista de electores
+import java.util.ArrayList; 
+import java.util.List;     
 import javafx.scene.control.Alert;
 import com.finalproject.presenter.LoginNavegador;
 import com.finalproject.presenter.LoginPresenter;
@@ -42,9 +41,9 @@ import com.finalproject.presenter.MostrarResultadosPresenter;
 public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos, VotacionNavegador {
 
     private Stage escenarioPrincipal;
-    private List<Elector> listaGlobalDeElectores; // Para almacenar los electores cargados
+    private List<Elector> listaGlobalDeElectores; 
     private List<Candidato> listaGlobalDeCandidatos;
-    private ServicioElectores servicioElectoresGlobal; // Instancia del servicio
+    private ServicioElectores servicioElectoresGlobal; 
     private ServicioCandidatos servicioCandidatosGlobal;
 
     @Override
@@ -75,12 +74,12 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     }
     
     private void mostrarPantallaCargarElectores() {
-        // Ya no necesitamos pasar el Stage a la vista
+        
         CargarElectoresView vistaCarga = new CargarElectoresView();
-        // Pasamos el servicioElectoresGlobal al presentador
+       
         new CargarElectoresPresenter(vistaCarga, servicioElectoresGlobal, this);
         
-        Scene escenaCarga = new Scene(vistaCarga.obtenerNodoVista(), 500, 400); // Ajusta tamaño
+        Scene escenaCarga = new Scene(vistaCarga.obtenerNodoVista(), 500, 400); 
         escenarioPrincipal.setScene(escenaCarga);
         escenarioPrincipal.setTitle("Cargar Electores");
     }
@@ -94,7 +93,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Cargar Candidatos");
     }
 
-    // --- Implementación de LoginNavegador ---
+    
     @Override
     public void navegarAPantallaAdmin() {
         mostrarMenuAdmin(); 
@@ -108,10 +107,10 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         mostrarAlerta(Alert.AlertType.ERROR, titulo, mensaje);
     }
 
-    // --- Implementación de AdminMenuNavegador ---
+    
     @Override
     public void navegarACargarElectores() {
-        mostrarPantallaCargarElectores(); // Llama al nuevo método
+        mostrarPantallaCargarElectores(); 
     }
     @Override
     public void navegarACargarCandidatos() {
@@ -143,7 +142,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     public void navegarAAbrirVotaciones() {
         EstadoVotaciones estadoVotaciones = EstadoVotaciones.obtenerInstancia();
         
-        // Verificar si ya hay votaciones iniciadas
+        
         if (estadoVotaciones.estanIniciadas()) {
             mostrarAlerta(Alert.AlertType.WARNING, 
                 "Votaciones en Progreso", 
@@ -151,7 +150,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
             return;
         }
 
-        // Verificar si hay candidatos y electores registrados
+        
         if (listaGlobalDeCandidatos.isEmpty()) {
             mostrarAlerta(Alert.AlertType.ERROR, 
                 "Error al Iniciar Votaciones", 
@@ -166,7 +165,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
             return;
         }
 
-        // Mostrar confirmación
+        
         Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
         alertaConfirmacion.setTitle("Iniciar Votaciones");
         alertaConfirmacion.setHeaderText(null);
@@ -222,31 +221,30 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         mostrarLogin();
     }
 
-    // --- Implementación de NavegadorCargaElectores ---
+    
     @Override
     public void cargaDeElectoresCompletada(List<Elector> electoresCargados, String mensajeExito) {
-        this.listaGlobalDeElectores.clear(); // Limpiar lista anterior
-        this.listaGlobalDeElectores.addAll(electoresCargados); // Añadir los nuevos
+        this.listaGlobalDeElectores.clear(); 
+        this.listaGlobalDeElectores.addAll(electoresCargados); 
         mostrarAlerta(Alert.AlertType.INFORMATION, "Carga Exitosa", 
             mensajeExito + "\nTotal en memoria: " + this.listaGlobalDeElectores.size());
-        // Opcional: Volver al menú admin automáticamente después de mostrar el mensaje
+        
         mostrarMenuAdmin();
     }
 
     @Override
     public void cargaDeElectoresFallida(String mensajeError) {
         mostrarAlerta(Alert.AlertType.ERROR, "Error de Carga", mensajeError);
-        // No volvemos al menú en caso de error, dejamos que el usuario decida qué hacer
+        
     }
     
     @Override
     public void solicitarRegresoAlMenuAdmin() {
-        // Este método se llama cuando el usuario quiere regresar al menú
-        // o cuando se completa una operación exitosamente
+        
         mostrarMenuAdmin();
     }
 
-    // Implementación de NavegadorCargaCandidatos
+    
     @Override
     public void cargaDeCandidatosCompletada(List<Candidato> candidatosCargados, String mensajeExito) {
         this.listaGlobalDeCandidatos = this.servicioCandidatosGlobal.obtenerCandidatosRegistrados();
@@ -260,7 +258,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         mostrarAlerta(Alert.AlertType.ERROR, "Error de Carga", mensajeError);
     }
 
-    // Método de utilidad para alertas
+   
     private void mostrarAlerta(Alert.AlertType tipoAlerta, String titulo, String mensaje) {
         Alert alerta = new Alert(tipoAlerta);
         alerta.setTitle(titulo);
@@ -279,7 +277,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Sistema de Votación");
     }
 
-    // Implementación de VotacionNavegador
+    
     @Override
     public void cerrarSesion() {
         mostrarLogin();

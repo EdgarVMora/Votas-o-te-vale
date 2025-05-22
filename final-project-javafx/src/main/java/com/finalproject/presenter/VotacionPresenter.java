@@ -25,13 +25,13 @@ public class VotacionPresenter implements NotificadorVotacionAlPresentador {
         this.vista.establecerNotificador(this);
         this.vista.establecerCandidatos(candidatos);
 
-        // Verificar si el elector ya votó
+       
         if (servicioVotos.electorYaVoto(elector)) {
             vista.mostrarMensajeError("Usted ya ha emitido su voto.");
             vista.deshabilitarVotacion();
         }
 
-        // Verificar si las votaciones están abiertas
+        
         if (!EstadoVotaciones.obtenerInstancia().estanIniciadas()) {
             vista.mostrarMensajeError("Las votaciones no están abiertas en este momento.");
             vista.deshabilitarVotacion();
@@ -79,7 +79,7 @@ public class VotacionPresenter implements NotificadorVotacionAlPresentador {
             return;
         }
 
-        // Para el voto nulo, pasamos null como candidato
+        
         boolean votoRegistrado = servicioVotos.registrarVoto(elector, null, true);
         
         if (votoRegistrado) {

@@ -46,16 +46,13 @@ public class ServicioCandidatos {
                     continue;
                 }
 
-                // Separar nombre completo
                 String[] partesNombre = lineaNombreCompleto.split("\\s+");
                 String nombre = partesNombre[0];
                 String apellidoPaterno = partesNombre.length > 1 ? partesNombre[1] : "";
                 String apellidoMaterno = partesNombre.length > 2 ? partesNombre[2] : "";
 
-                // Crear el candidato
                 Candidato candidato = new Candidato(nombre, apellidoPaterno, apellidoMaterno, lineaPartido, "");
 
-                // Verificar si el candidato ya está registrado
                 if (candidatosRegistrados.contains(candidato)) {
                     candidatosDuplicados.add(candidato);
                     System.err.println("Advertencia: Candidato duplicado encontrado: " + candidato.toString());
