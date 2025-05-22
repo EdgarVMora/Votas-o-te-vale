@@ -52,13 +52,18 @@ public class MostrarElectoresView implements MostrarElectoresViewActions {
         columnaUsuario.setCellValueFactory(cellData -> 
             new SimpleStringProperty(cellData.getValue().getUsuario()));
 
+        TableColumn<Elector, String> columnaContrasena = new TableColumn<>("Contraseña");
+        columnaContrasena.setCellValueFactory(cellData -> 
+            new SimpleStringProperty(cellData.getValue().getContrasena()));
+
         // Añadir columnas a la tabla
         tablaElectores.getColumns().addAll(
             columnaNombre, 
             columnaApellidoPaterno, 
             columnaApellidoMaterno, 
             columnaCorreo,
-            columnaUsuario
+            columnaUsuario,
+            columnaContrasena
         );
 
         // Mensaje de error
@@ -73,7 +78,11 @@ public class MostrarElectoresView implements MostrarElectoresViewActions {
             }
         });
 
-        panelPrincipal.getChildren().addAll(titulo, tablaElectores, mensajeError, botonRegresar);
+        // Añadir un texto informativo sobre las contraseñas
+        Text infoContrasenas = new Text("Nota: Las contraseñas se generan automáticamente al cargar los electores.");
+        infoContrasenas.setStyle("-fx-font-style: italic; -fx-fill: gray;");
+
+        panelPrincipal.getChildren().addAll(titulo, infoContrasenas, tablaElectores, mensajeError, botonRegresar);
     }
 
     @Override

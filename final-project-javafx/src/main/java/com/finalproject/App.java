@@ -24,19 +24,28 @@ import com.finalproject.presenter.LoginPresenter;
 import com.finalproject.view.LoginView;
 import com.finalproject.view.MostrarElectoresView;
 import com.finalproject.presenter.MostrarElectoresPresenter;
+import com.finalproject.model.Candidato;
+import com.finalproject.model.ServicioCandidatos;
+import com.finalproject.presenter.CargarCandidatosPresenter;
+import com.finalproject.presenter.NavegadorCargaCandidatos;
+import com.finalproject.view.CargarCandidatosView;
 
-public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores {
+public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos {
 
     private Stage escenarioPrincipal;
     private List<Elector> listaGlobalDeElectores; // Para almacenar los electores cargados
+    private List<Candidato> listaGlobalDeCandidatos;
     private ServicioElectores servicioElectoresGlobal; // Instancia del servicio
+    private ServicioCandidatos servicioCandidatosGlobal;
 
     @Override
     public void start(Stage primaryStage) {
         this.escenarioPrincipal = primaryStage;
         this.escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP");
         this.listaGlobalDeElectores = new ArrayList<>();
+        this.listaGlobalDeCandidatos = new ArrayList<>();
         this.servicioElectoresGlobal = new ServicioElectores(); // Inicializar el servicio
+        this.servicioCandidatosGlobal = new ServicioCandidatos();
         mostrarLogin();
     }
 
@@ -67,6 +76,15 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         escenarioPrincipal.setTitle("Cargar Electores");
     }
 
+    private void mostrarPantallaCargarCandidatos() {
+        CargarCandidatosView vistaCarga = new CargarCandidatosView();
+        new CargarCandidatosPresenter(vistaCarga, servicioCandidatosGlobal, this);
+        
+        Scene escenaCarga = new Scene(vistaCarga.obtenerNodoVista(), 500, 400);
+        escenarioPrincipal.setScene(escenaCarga);
+        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Cargar Candidatos");
+    }
+
     // --- Implementación de LoginNavegador ---
     @Override
     public void navegarAPantallaAdmin() {
@@ -87,13 +105,15 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         mostrarPantallaCargarElectores(); // Llama al nuevo método
     }
     @Override
-    public void navegarACargarCandidatos() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Cargar Candidatos (pendiente)");}
+    public void navegarACargarCandidatos() {
+        mostrarPantallaCargarCandidatos();
+    }
     @Override
     public void navegarAMostrarElectores() {
         MostrarElectoresView vistaMostrar = new MostrarElectoresView();
         new MostrarElectoresPresenter(vistaMostrar, this.listaGlobalDeElectores, this);
         
-        Scene escenaMostrar = new Scene(vistaMostrar.obtenerNodoVista(), 800, 600);
+        Scene escenaMostrar = new Scene(vistaMostrar.obtenerNodoVista(), 1000, 600);
         escenarioPrincipal.setScene(escenaMostrar);
         escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Lista de Electores");
     }
@@ -140,6 +160,20 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         // Este método se llama cuando el usuario quiere regresar al menú
         // o cuando se completa una operación exitosamente
         mostrarMenuAdmin();
+    }
+
+    // Implementación de NavegadorCargaCandidatos
+    @Override
+    public void cargaDeCandidatosCompletada(List<Candidato> candidatosCargados, String mensajeExito) {
+        this.listaGlobalDeCandidatos.addAll(candidatosCargados);
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Carga Exitosa", 
+            mensajeExito + "\nTotal de candidatos en memoria: " + this.listaGlobalDeCandidatos.size());
+        mostrarMenuAdmin();
+    }
+
+    @Override
+    public void cargaDeCandidatosFallida(String mensajeError) {
+        mostrarAlerta(Alert.AlertType.ERROR, "Error de Carga", mensajeError);
     }
 
     // Método de utilidad para alertas
