@@ -29,6 +29,8 @@ import com.finalproject.model.ServicioCandidatos;
 import com.finalproject.presenter.CargarCandidatosPresenter;
 import com.finalproject.presenter.NavegadorCargaCandidatos;
 import com.finalproject.view.CargarCandidatosView;
+import com.finalproject.view.MostrarCandidatosView;
+import com.finalproject.presenter.MostrarCandidatosPresenter;
 
 public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos {
 
@@ -118,7 +120,14 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Lista de Electores");
     }
     @Override
-    public void navegarAMostrarCandidatos() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Mostrar Candidatos (pendiente)");}
+    public void navegarAMostrarCandidatos() {
+        MostrarCandidatosView vistaMostrar = new MostrarCandidatosView(this.listaGlobalDeCandidatos);
+        new MostrarCandidatosPresenter(vistaMostrar, this.listaGlobalDeCandidatos, this);
+        
+        Scene escenaMostrar = new Scene(vistaMostrar.obtenerNodoVista(), 800, 600);
+        escenarioPrincipal.setScene(escenaMostrar);
+        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Lista de Candidatos");
+    }
     @Override
     public void cerrarSesionYMostrarLogin() {
         mostrarLogin();

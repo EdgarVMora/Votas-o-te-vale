@@ -5,8 +5,10 @@
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/AdminMenuNavegador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/CargarElectoresViewActions.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/MostrarElectoresPresenter.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/NotificadorMostrarCandidatosAlPresentador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/LoginPresenter.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/CargarCandidatosViewActions.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/MostrarCandidatosView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/NotificadorMenuAdminAlPresentador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/CargarElectoresView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/LoginView.java
@@ -22,8 +24,10 @@
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/NotificadorCargarElectoresAlPresentador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/ServicioElectores.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/CargarElectoresPresenter.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/MostrarCandidatosPresenter.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/AdminMenuView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/Fecha.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/MostrarCandidatosViewActions.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/AdminMenuPresenter.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/NavegadorCargaCandidatos.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/LoginViewActions.java

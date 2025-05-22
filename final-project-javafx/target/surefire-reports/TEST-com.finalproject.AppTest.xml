@@ -12,7 +12,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="MX"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/surefire/surefirebooter-20250522064557959_3.jar /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/surefire 2025-05-22T06-45-57_925-jvmRun1 surefire-20250522064557959_1tmp surefire_0-20250522064557959_2tmp"/>
+    <property name="sun.java.command" value="/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/surefire/surefirebooter-20250522065144719_3.jar /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/surefire 2025-05-22T06-51-44_687-jvmRun1 surefire-20250522065144719_1tmp surefire_0-20250522065144719_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/test-classes:/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/classes:/Users/edgarmora/.m2/repository/org/openjfx/javafx-controls/21.0.2/javafx-controls-21.0.2.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-controls/21.0.2/javafx-controls-21.0.2-mac-aarch64.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-fxml/21.0.2/javafx-fxml-21.0.2.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-fxml/21.0.2/javafx-fxml-21.0.2-mac-aarch64.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-graphics/21.0.2/javafx-graphics-21.0.2.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-graphics/21.0.2/javafx-graphics-21.0.2-mac-aarch64.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-base/21.0.2/javafx-base-21.0.2.jar:/Users/edgarmora/.m2/repository/org/openjfx/javafx-base/21.0.2/javafx-base-21.0.2-mac-aarch64.jar:/Users/edgarmora/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/edgarmora/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:"/>
@@ -29,7 +29,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/surefire/surefirebooter-20250522064557959_3.jar"/>
+    <property name="surefire.real.class.path" value="/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/target/surefire/surefirebooter-20250522065144719_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.runtime.version" value="21.0.7+6-LTS"/>
@@ -58,5 +58,5 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.finalproject.AppTest" time="0.001"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.finalproject.AppTest" time="0.002"/>
 </testsuite>
