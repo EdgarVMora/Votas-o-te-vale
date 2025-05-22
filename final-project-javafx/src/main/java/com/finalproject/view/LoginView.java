@@ -32,7 +32,7 @@ public class LoginView implements LoginViewActions {
         panelCuadricula.setVgap(10);
         panelCuadricula.setPadding(new Insets(25, 25, 25, 25));
 
-        Text tituloEscena = new Text("Inicio de Sesión - Administrador");
+        Text tituloEscena = new Text("Sistema de Votaciones FFC - BUAP");
         tituloEscena.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         panelCuadricula.add(tituloEscena, 0, 0, 2, 1);
 
@@ -40,14 +40,14 @@ public class LoginView implements LoginViewActions {
         panelCuadricula.add(etiquetaUsuario, 0, 1);
 
         campoUsuario = new TextField();
-        campoUsuario.setPromptText("admin");
+        campoUsuario.setPromptText("Ingrese su usuario");
         panelCuadricula.add(campoUsuario, 1, 1);
 
         Label etiquetaContrasena = new Label("Contraseña:");
         panelCuadricula.add(etiquetaContrasena, 0, 2);
 
         campoContrasena = new PasswordField();
-        campoContrasena.setPromptText("12345");
+        campoContrasena.setPromptText("Ingrese su contraseña");
         panelCuadricula.add(campoContrasena, 1, 2);
 
         Button botonLogin = new Button("Iniciar Sesión");
@@ -55,6 +55,11 @@ public class LoginView implements LoginViewActions {
 
         textoEstado = new Text();
         panelCuadricula.add(textoEstado, 0, 5, 2, 1);
+
+        Text textoInfo = new Text("Ingrese sus credenciales para acceder al sistema");
+        textoInfo.setFont(Font.font("Tahoma", FontWeight.NORMAL, 12));
+        textoInfo.setFill(Color.GRAY);
+        panelCuadricula.add(textoInfo, 0, 6, 2, 1);
 
         botonLogin.setOnAction(e -> {
             if (notificadorPresentador != null) {

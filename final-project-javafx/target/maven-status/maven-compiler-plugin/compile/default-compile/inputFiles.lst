@@ -7,9 +7,12 @@
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/MostrarElectoresPresenter.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/NotificadorMostrarCandidatosAlPresentador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/LoginPresenter.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/VotacionPresenter.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/CargarCandidatosViewActions.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/VotacionView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/MostrarCandidatosView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/NotificadorMenuAdminAlPresentador.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/VotacionViewActions.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/CargarElectoresView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/LoginView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/MostrarElectoresViewActions.java
@@ -17,6 +20,7 @@
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/CargarCandidatosView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/AdminMenuViewActions.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/Elector.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/ServicioVotos.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/Candidato.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/MostrarElectoresView.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/CargarCandidatosPresenter.java
@@ -30,6 +34,9 @@
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/MostrarCandidatosViewActions.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/AdminMenuPresenter.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/EstadoVotaciones.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/NotificadorVotacionAlPresentador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/NavegadorCargaCandidatos.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/view/LoginViewActions.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/model/Voto.java
+/Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/VotacionNavegador.java
 /Users/edgarmora/Documents/BUAP Primavera 2025/javaProjectsFx/final-project-javafx/src/main/java/com/finalproject/presenter/LoginNavegador.java

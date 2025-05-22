@@ -33,8 +33,11 @@ import com.finalproject.view.MostrarCandidatosView;
 import com.finalproject.presenter.MostrarCandidatosPresenter;
 import com.finalproject.model.EstadoVotaciones;
 import javafx.scene.control.ButtonType;
+import com.finalproject.view.VotacionView;
+import com.finalproject.presenter.VotacionPresenter;
+import com.finalproject.presenter.VotacionNavegador;
 
-public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos {
+public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos, VotacionNavegador {
 
     private Stage escenarioPrincipal;
     private List<Elector> listaGlobalDeElectores; // Para almacenar los electores cargados
@@ -48,14 +51,14 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         this.escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP");
         this.listaGlobalDeElectores = new ArrayList<>();
         this.listaGlobalDeCandidatos = new ArrayList<>();
-        this.servicioElectoresGlobal = new ServicioElectores(); // Inicializar el servicio
-        this.servicioCandidatosGlobal = new ServicioCandidatos();
+        this.servicioElectoresGlobal = new ServicioElectores();
+        this.servicioCandidatosGlobal = ServicioCandidatos.obtenerInstancia();
         mostrarLogin();
     }
 
     private void mostrarLogin() {
         LoginView vistaLogin = new LoginView();
-        new LoginPresenter(vistaLogin, this);
+        new LoginPresenter(vistaLogin, this, this.listaGlobalDeElectores);
         Scene escena = new Scene(vistaLogin.obtenerNodoVista(), 400, 300);
         escenarioPrincipal.setScene(escena);
         escenarioPrincipal.show();
@@ -250,7 +253,7 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     // Implementación de NavegadorCargaCandidatos
     @Override
     public void cargaDeCandidatosCompletada(List<Candidato> candidatosCargados, String mensajeExito) {
-        this.listaGlobalDeCandidatos.addAll(candidatosCargados);
+        this.listaGlobalDeCandidatos = this.servicioCandidatosGlobal.obtenerCandidatosRegistrados();
         mostrarAlerta(Alert.AlertType.INFORMATION, "Carga Exitosa", 
             mensajeExito + "\nTotal de candidatos en memoria: " + this.listaGlobalDeCandidatos.size());
         mostrarMenuAdmin();
@@ -268,6 +271,22 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
+    }
+
+    @Override
+    public void navegarAPantallaElector(Elector elector) {
+        VotacionView vistaVotacion = new VotacionView(elector);
+        new VotacionPresenter(vistaVotacion, elector, this.listaGlobalDeCandidatos, this);
+        
+        Scene escenaVotacion = new Scene(vistaVotacion.obtenerNodoVista(), 500, 400);
+        escenarioPrincipal.setScene(escenaVotacion);
+        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Sistema de Votación");
+    }
+
+    // Implementación de VotacionNavegador
+    @Override
+    public void cerrarSesion() {
+        mostrarLogin();
     }
 
     public static void main(String[] args) {
