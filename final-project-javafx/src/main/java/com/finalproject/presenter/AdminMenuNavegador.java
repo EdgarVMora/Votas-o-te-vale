@@ -8,7 +8,6 @@ public interface AdminMenuNavegador {
     void navegarAAbrirVotaciones();
     void navegarACerrarVotaciones();
     void navegarAMostrarResultados();
-    void navegarARegistro();
     void regresarAlMenuAdmin();
     void alPulsarBotonCerrarSesion();
 }

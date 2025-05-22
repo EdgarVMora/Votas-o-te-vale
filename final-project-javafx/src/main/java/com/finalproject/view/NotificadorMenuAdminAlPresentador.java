@@ -8,6 +8,5 @@ public interface NotificadorMenuAdminAlPresentador {
     void alPulsarBotonAbrirVotaciones();
     void alPulsarBotonCerrarVotaciones();
     void alPulsarBotonImprimirResultados();
-    void alPulsarBotonRegistro();
     void alPulsarBotonCerrarSesion();
 }

@@ -33,7 +33,6 @@ public class AdminMenuView implements AdminMenuViewActions {
         Button botonAbrirVotaciones = new Button("Abrir votaciones");
         Button botonCerrarVotaciones = new Button("Cerrar votaciones");
         Button botonImprimirResultados = new Button("Imprimir resultados");
-        Button botonRegistro = new Button("Registro");
         Button botonCerrarSesion = new Button("Cerrar Sesión");
 
         // Asignar acciones a los botones para notificar al presentador
@@ -44,7 +43,6 @@ public class AdminMenuView implements AdminMenuViewActions {
         botonAbrirVotaciones.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonAbrirVotaciones(); });
         botonCerrarVotaciones.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonCerrarVotaciones(); });
         botonImprimirResultados.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonImprimirResultados(); });
-        botonRegistro.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonRegistro(); });
         botonCerrarSesion.setOnAction(e -> { if (notificador != null) notificador.alPulsarBotonCerrarSesion(); });
         
         panelPrincipal.getChildren().addAll(
@@ -56,7 +54,6 @@ public class AdminMenuView implements AdminMenuViewActions {
             botonAbrirVotaciones,
             botonCerrarVotaciones,
             botonImprimirResultados,
-            botonRegistro,
             new Text(" "), // Un pequeño separador visual si lo deseas
             botonCerrarSesion
         );

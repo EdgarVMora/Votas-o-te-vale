@@ -57,12 +57,6 @@ public class AdminMenuPresenter implements NotificadorMenuAdminAlPresentador {
     }
 
     @Override
-    public void alPulsarBotonRegistro() {
-        System.out.println("Presentador: Botón Registro pulsado.");
-        if (navegador != null) navegador.navegarARegistro();
-    }
-
-    @Override
     public void alPulsarBotonCerrarSesion() {
         System.out.println("Presentador: Botón Cerrar Sesión pulsado.");
         if (navegador != null) navegador.alPulsarBotonCerrarSesion();

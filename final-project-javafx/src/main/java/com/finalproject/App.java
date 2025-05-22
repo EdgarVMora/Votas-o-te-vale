@@ -218,9 +218,6 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     }
 
     @Override
-    public void navegarARegistro() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Registro (pendiente)");}
-
-    @Override
     public void alPulsarBotonCerrarSesion() {
         mostrarLogin();
     }
