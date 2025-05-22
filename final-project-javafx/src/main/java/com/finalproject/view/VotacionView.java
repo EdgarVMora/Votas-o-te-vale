@@ -16,6 +16,7 @@ public class VotacionView implements VotacionViewActions {
     private VBox panelPrincipal;
     private ComboBox<Candidato> comboBoxCandidatos;
     private Button botonVotar;
+    private Button botonVotoNulo;
     private Button botonCerrarSesion;
     private Text mensajeEstado;
     private NotificadorVotacionAlPresentador notificador;
@@ -38,7 +39,7 @@ public class VotacionView implements VotacionViewActions {
                                  electorActual.getApellidoPaterno());
         bienvenida.setFont(Font.font("Tahoma", FontWeight.NORMAL, 14));
 
-        Label instrucciones = new Label("Seleccione el candidato por el que desea votar:");
+        Label instrucciones = new Label("Seleccione el candidato por el que desea votar o anule su voto:");
         comboBoxCandidatos = new ComboBox<>();
         comboBoxCandidatos.setPromptText("Seleccione un candidato");
 
@@ -46,6 +47,13 @@ public class VotacionView implements VotacionViewActions {
         botonVotar.setOnAction(e -> {
             if (notificador != null) {
                 notificador.alPulsarBotonVotar();
+            }
+        });
+
+        botonVotoNulo = new Button("Anular Voto");
+        botonVotoNulo.setOnAction(e -> {
+            if (notificador != null) {
+                notificador.alPulsarBotonVotoNulo();
             }
         });
 
@@ -66,6 +74,7 @@ public class VotacionView implements VotacionViewActions {
             instrucciones,
             comboBoxCandidatos,
             botonVotar,
+            botonVotoNulo,
             mensajeEstado,
             new Separator(),
             botonCerrarSesion
@@ -110,5 +119,6 @@ public class VotacionView implements VotacionViewActions {
     public void deshabilitarVotacion() {
         comboBoxCandidatos.setDisable(true);
         botonVotar.setDisable(true);
+        botonVotoNulo.setDisable(true);
     }
 } 

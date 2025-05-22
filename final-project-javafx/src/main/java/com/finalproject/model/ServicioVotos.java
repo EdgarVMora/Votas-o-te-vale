@@ -11,10 +11,12 @@ public class ServicioVotos {
     private static ServicioVotos instancia;
     private List<Voto> votos;
     private Map<Candidato, Integer> conteoVotos;
+    private int votosNulos;
 
     private ServicioVotos() {
         this.votos = new ArrayList<>();
         this.conteoVotos = new HashMap<>();
+        this.votosNulos = 0;
     }
 
     public static ServicioVotos obtenerInstancia() {
@@ -24,7 +26,7 @@ public class ServicioVotos {
         return instancia;
     }
 
-    public boolean registrarVoto(Elector elector, Candidato candidato) {
+    public boolean registrarVoto(Elector elector, Candidato candidato, boolean esNulo) {
         // Verificar si el elector ya votó
         for (Voto voto : votos) {
             if (voto.getElector().equals(elector)) {
@@ -34,11 +36,15 @@ public class ServicioVotos {
 
         // Registrar el voto
         String fechaVoto = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        Voto nuevoVoto = new Voto(elector, candidato, fechaVoto);
+        Voto nuevoVoto = new Voto(elector, candidato, fechaVoto, esNulo);
         votos.add(nuevoVoto);
 
         // Actualizar conteo
-        conteoVotos.put(candidato, conteoVotos.getOrDefault(candidato, 0) + 1);
+        if (esNulo) {
+            votosNulos++;
+        } else {
+            conteoVotos.put(candidato, conteoVotos.getOrDefault(candidato, 0) + 1);
+        }
 
         return true;
     }
@@ -56,6 +62,10 @@ public class ServicioVotos {
         return new HashMap<>(conteoVotos);
     }
 
+    public int obtenerVotosNulos() {
+        return votosNulos;
+    }
+
     public List<Voto> obtenerTodosLosVotos() {
         return new ArrayList<>(votos);
     }
@@ -63,5 +73,6 @@ public class ServicioVotos {
     public void reiniciarVotos() {
         votos.clear();
         conteoVotos.clear();
+        votosNulos = 0;
     }
 } 

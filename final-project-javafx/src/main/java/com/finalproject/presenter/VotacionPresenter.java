@@ -57,13 +57,36 @@ public class VotacionPresenter implements NotificadorVotacionAlPresentador {
             return;
         }
 
-        boolean votoRegistrado = servicioVotos.registrarVoto(elector, candidatoSeleccionado);
+        boolean votoRegistrado = servicioVotos.registrarVoto(elector, candidatoSeleccionado, false);
         
         if (votoRegistrado) {
             vista.mostrarMensajeExito("¡Su voto ha sido registrado exitosamente!");
             vista.deshabilitarVotacion();
         } else {
             vista.mostrarMensajeError("No se pudo registrar su voto. Por favor, intente nuevamente.");
+        }
+    }
+
+    @Override
+    public void alPulsarBotonVotoNulo() {
+        if (servicioVotos.electorYaVoto(elector)) {
+            vista.mostrarMensajeError("Usted ya ha emitido su voto.");
+            return;
+        }
+
+        if (!EstadoVotaciones.obtenerInstancia().estanIniciadas()) {
+            vista.mostrarMensajeError("Las votaciones no están abiertas en este momento.");
+            return;
+        }
+
+        // Para el voto nulo, pasamos null como candidato
+        boolean votoRegistrado = servicioVotos.registrarVoto(elector, null, true);
+        
+        if (votoRegistrado) {
+            vista.mostrarMensajeExito("¡Su voto nulo ha sido registrado exitosamente!");
+            vista.deshabilitarVotacion();
+        } else {
+            vista.mostrarMensajeError("No se pudo registrar su voto nulo. Por favor, intente nuevamente.");
         }
     }
 
