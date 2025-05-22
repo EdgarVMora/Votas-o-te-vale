@@ -31,6 +31,8 @@ import com.finalproject.presenter.NavegadorCargaCandidatos;
 import com.finalproject.view.CargarCandidatosView;
 import com.finalproject.view.MostrarCandidatosView;
 import com.finalproject.presenter.MostrarCandidatosPresenter;
+import com.finalproject.model.EstadoVotaciones;
+import javafx.scene.control.ButtonType;
 
 public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores, NavegadorCargaCandidatos {
 
@@ -134,9 +136,83 @@ public class App extends Application implements LoginNavegador, AdminMenuNavegad
     }
     // Asegúrate de implementar todos los métodos de AdminMenuNavegador
     @Override
-    public void navegarAAbrirVotaciones() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Abrir Votaciones (pendiente)");}
+    public void navegarAAbrirVotaciones() {
+        EstadoVotaciones estadoVotaciones = EstadoVotaciones.obtenerInstancia();
+        
+        // Verificar si ya hay votaciones iniciadas
+        if (estadoVotaciones.estanIniciadas()) {
+            mostrarAlerta(Alert.AlertType.WARNING, 
+                "Votaciones en Progreso", 
+                "Las votaciones ya están iniciadas.");
+            return;
+        }
+
+        // Verificar si hay candidatos y electores registrados
+        if (listaGlobalDeCandidatos.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, 
+                "Error al Iniciar Votaciones", 
+                "No hay candidatos registrados. Por favor, cargue candidatos antes de iniciar las votaciones.");
+            return;
+        }
+
+        if (listaGlobalDeElectores.isEmpty()) {
+            mostrarAlerta(Alert.AlertType.ERROR, 
+                "Error al Iniciar Votaciones", 
+                "No hay electores registrados. Por favor, cargue electores antes de iniciar las votaciones.");
+            return;
+        }
+
+        // Mostrar confirmación
+        Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertaConfirmacion.setTitle("Iniciar Votaciones");
+        alertaConfirmacion.setHeaderText(null);
+        alertaConfirmacion.setContentText(
+            "¿Está seguro de iniciar las votaciones?\n\n" +
+            "Candidatos registrados: " + listaGlobalDeCandidatos.size() + "\n" +
+            "Electores registrados: " + listaGlobalDeElectores.size() + "\n\n" +
+            "Una vez iniciadas, los electores podrán acceder al sistema de votación."
+        );
+
+        alertaConfirmacion.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                estadoVotaciones.iniciarVotaciones();
+                mostrarAlerta(Alert.AlertType.INFORMATION, 
+                    "Votaciones Iniciadas", 
+                    "Las votaciones han sido iniciadas exitosamente.\n" +
+                    "Los electores ahora pueden acceder al sistema de votación con sus credenciales.");
+            }
+        });
+    }
+
     @Override
-    public void navegarACerrarVotaciones() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Cerrar Votaciones (pendiente)");}
+    public void navegarACerrarVotaciones() {
+        EstadoVotaciones estadoVotaciones = EstadoVotaciones.obtenerInstancia();
+        
+        if (!estadoVotaciones.estanIniciadas()) {
+            mostrarAlerta(Alert.AlertType.WARNING, 
+                "Votaciones no Iniciadas", 
+                "Las votaciones no están iniciadas.");
+            return;
+        }
+
+        Alert alertaConfirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        alertaConfirmacion.setTitle("Cerrar Votaciones");
+        alertaConfirmacion.setHeaderText(null);
+        alertaConfirmacion.setContentText(
+            "¿Está seguro de cerrar las votaciones?\n\n" +
+            "Esta acción no se puede deshacer."
+        );
+
+        alertaConfirmacion.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                estadoVotaciones.cerrarVotaciones();
+                mostrarAlerta(Alert.AlertType.INFORMATION, 
+                    "Votaciones Cerradas", 
+                    "Las votaciones han sido cerradas exitosamente.");
+            }
+        });
+    }
+
     @Override
     public void navegarAImprimirResultados() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Imprimir Resultados (pendiente)");}
     @Override
