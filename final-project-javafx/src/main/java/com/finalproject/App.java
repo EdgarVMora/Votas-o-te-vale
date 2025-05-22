@@ -1,83 +1,148 @@
 package com.finalproject;
 
-// Asegúrate que este import sea el correcto para la interfaz LoginNavegador
-import com.finalproject.presenter.LoginNavegador; 
-import com.finalproject.presenter.LoginPresenter;
-import com.finalproject.view.LoginView;
-import com.finalproject.view.LoginViewActions; // Necesario para instanciar LoginPresenter
+// ... otros imports para Login y AdminMenu ...
+import com.finalproject.presenter.AdminMenuNavegador;
+import com.finalproject.presenter.AdminMenuPresenter;
+import com.finalproject.view.AdminMenuView;
+
+// Imports para Cargar Electores
+import com.finalproject.model.Elector; // Importar Elector
+import com.finalproject.model.ServicioElectores; // Importar ServicioElectores
+import com.finalproject.presenter.CargarElectoresPresenter;
+import com.finalproject.presenter.NavegadorCargaElectores; // La nueva interfaz
+import com.finalproject.view.CargarElectoresView;
+// import com.finalproject.view.CargarElectoresViewActions; // No se usa directamente aquí
 
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label; // No se usa directamente aquí pero es bueno tenerlo si se expande el placeholder
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.ArrayList; // Para la lista de electores
+import java.util.List;     // Para la lista de electores
+import javafx.scene.control.Alert;
+import com.finalproject.presenter.LoginNavegador;
+import com.finalproject.presenter.LoginPresenter;
+import com.finalproject.view.LoginView;
+import com.finalproject.view.MostrarElectoresView;
+import com.finalproject.presenter.MostrarElectoresPresenter;
 
-public class App extends Application implements LoginNavegador {
+public class App extends Application implements LoginNavegador, AdminMenuNavegador, NavegadorCargaElectores {
 
     private Stage escenarioPrincipal;
+    private List<Elector> listaGlobalDeElectores; // Para almacenar los electores cargados
+    private ServicioElectores servicioElectoresGlobal; // Instancia del servicio
 
     @Override
     public void start(Stage primaryStage) {
         this.escenarioPrincipal = primaryStage;
         this.escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP");
+        this.listaGlobalDeElectores = new ArrayList<>();
+        this.servicioElectoresGlobal = new ServicioElectores(); // Inicializar el servicio
         mostrarLogin();
     }
 
     private void mostrarLogin() {
-        // La vista se crea primero
         LoginView vistaLogin = new LoginView();
-        
-        // El presentador se crea con la vista (como LoginViewActions) y el navegador (this)
-        new LoginPresenter(vistaLogin, this); 
-
+        new LoginPresenter(vistaLogin, this);
         Scene escena = new Scene(vistaLogin.obtenerNodoVista(), 400, 300);
         escenarioPrincipal.setScene(escena);
         escenarioPrincipal.show();
     }
 
-    @Override
-    public void navegarAPantallaAdmin() {
-        mostrarMenuAdminTemporal();
+    private void mostrarMenuAdmin() {
+        AdminMenuView vistaMenuAdmin = new AdminMenuView();
+        new AdminMenuPresenter(vistaMenuAdmin, this);
+        Scene escenaMenuAdmin = new Scene(vistaMenuAdmin.obtenerNodoVista(), 450, 550);
+        escenarioPrincipal.setScene(escenaMenuAdmin);
+        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Panel de Administrador");
     }
     
+    private void mostrarPantallaCargarElectores() {
+        // Ya no necesitamos pasar el Stage a la vista
+        CargarElectoresView vistaCarga = new CargarElectoresView();
+        // Pasamos el servicioElectoresGlobal al presentador
+        new CargarElectoresPresenter(vistaCarga, servicioElectoresGlobal, this);
+        
+        Scene escenaCarga = new Scene(vistaCarga.obtenerNodoVista(), 500, 400); // Ajusta tamaño
+        escenarioPrincipal.setScene(escenaCarga);
+        escenarioPrincipal.setTitle("Cargar Electores");
+    }
+
+    // --- Implementación de LoginNavegador ---
+    @Override
+    public void navegarAPantallaAdmin() {
+        mostrarMenuAdmin(); 
+    }
     @Override
     public void mostrarMensajeLoginExitoso(String titulo, String mensaje) {
         mostrarAlerta(Alert.AlertType.INFORMATION, titulo, mensaje);
     }
-
     @Override
     public void mostrarMensajeLoginFallido(String titulo, String mensaje) {
         mostrarAlerta(Alert.AlertType.ERROR, titulo, mensaje);
     }
 
-    private void mostrarMenuAdminTemporal() {
-        VBox panelMenuAdmin = new VBox(15);
-        panelMenuAdmin.setAlignment(Pos.CENTER);
-        panelMenuAdmin.setPadding(new Insets(25));
-
-        Text tituloMenu = new Text("Menú del Administrador (MVP)");
-        tituloMenu.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-
-        Button botonPlaceholder = new Button("Funcionalidad Admin Placeholder");
-        botonPlaceholder.setOnAction(e -> System.out.println("Acción del menú admin placeholder"));
+    // --- Implementación de AdminMenuNavegador ---
+    @Override
+    public void navegarACargarElectores() {
+        mostrarPantallaCargarElectores(); // Llama al nuevo método
+    }
+    @Override
+    public void navegarACargarCandidatos() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Cargar Candidatos (pendiente)");}
+    @Override
+    public void navegarAMostrarElectores() {
+        MostrarElectoresView vistaMostrar = new MostrarElectoresView();
+        new MostrarElectoresPresenter(vistaMostrar, this.listaGlobalDeElectores, this);
         
-        Button botonCerrarSesion = new Button("Cerrar Sesión");
-        botonCerrarSesion.setOnAction(e -> mostrarLogin());
+        Scene escenaMostrar = new Scene(vistaMostrar.obtenerNodoVista(), 800, 600);
+        escenarioPrincipal.setScene(escenaMostrar);
+        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Lista de Electores");
+    }
+    @Override
+    public void navegarAMostrarCandidatos() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Mostrar Candidatos (pendiente)");}
+    @Override
+    public void cerrarSesionYMostrarLogin() {
+        mostrarLogin();
+    }
+    // Asegúrate de implementar todos los métodos de AdminMenuNavegador
+    @Override
+    public void navegarAAbrirVotaciones() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Abrir Votaciones (pendiente)");}
+    @Override
+    public void navegarACerrarVotaciones() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Cerrar Votaciones (pendiente)");}
+    @Override
+    public void navegarAImprimirResultados() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Imprimir Resultados (pendiente)");}
+    @Override
+    public void navegarARegistro() { mostrarAlerta(Alert.AlertType.INFORMATION, "Navegación", "Ir a Registro (pendiente)");}
 
-        panelMenuAdmin.getChildren().addAll(tituloMenu, botonPlaceholder, botonCerrarSesion);
-
-        Scene escenaMenuAdmin = new Scene(panelMenuAdmin, 450, 550);
-        escenarioPrincipal.setScene(escenaMenuAdmin);
-        escenarioPrincipal.setTitle("VOTACIONES FFC - BUAP - Panel de Administrador");
+    @Override
+    public void regresarAlMenuAdmin() {
+        mostrarMenuAdmin();
     }
 
+    // --- Implementación de NavegadorCargaElectores ---
+    @Override
+    public void cargaDeElectoresCompletada(List<Elector> electoresCargados, String mensajeExito) {
+        this.listaGlobalDeElectores.clear(); // Limpiar lista anterior
+        this.listaGlobalDeElectores.addAll(electoresCargados); // Añadir los nuevos
+        mostrarAlerta(Alert.AlertType.INFORMATION, "Carga Exitosa", 
+            mensajeExito + "\nTotal en memoria: " + this.listaGlobalDeElectores.size());
+        // Opcional: Volver al menú admin automáticamente después de mostrar el mensaje
+        mostrarMenuAdmin();
+    }
+
+    @Override
+    public void cargaDeElectoresFallida(String mensajeError) {
+        mostrarAlerta(Alert.AlertType.ERROR, "Error de Carga", mensajeError);
+        // No volvemos al menú en caso de error, dejamos que el usuario decida qué hacer
+    }
+    
+    @Override
+    public void solicitarRegresoAlMenuAdmin() {
+        // Este método se llama cuando el usuario quiere regresar al menú
+        // o cuando se completa una operación exitosamente
+        mostrarMenuAdmin();
+    }
+
+    // Método de utilidad para alertas
     private void mostrarAlerta(Alert.AlertType tipoAlerta, String titulo, String mensaje) {
         Alert alerta = new Alert(tipoAlerta);
         alerta.setTitle(titulo);
